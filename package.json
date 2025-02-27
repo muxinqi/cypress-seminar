@@ -6,7 +6,12 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "server": "node src/server.js",
-    "cypress:run": "cypress run --component"
+    "cypress:run": "cypress run --component",
+    "cypress:open": "cypress open"
+  },
+  "engines": {
+    "node": "^22",
+    "npm": "^11"
   },
   "dependencies": {
     "react": "^19.0.0",
