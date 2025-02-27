@@ -7,17 +7,17 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   const [username, setUsername] = useState('');
 
-  const handleLogin = async (creds: { username: string; password: string }) => {
+  const handleLogin = async (credentials: { username: string; password: string }) => {
     try {
       setErrorMessage('');
       const res = await fetch('/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(creds),
+        body: JSON.stringify(credentials),
       });
       if (res.status === 200) {
         setIsAuthed(true);
-        setUsername(creds.username);
+        setUsername(credentials.username);
       } else {
         if (res.status === 401) {
           const { message } = await res.json();
@@ -31,16 +31,15 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    setIsAuthed(false);
+    setUsername('');
+  };
+
   return (
     <div className="lg:container lg mx-auto m-10">
       {isAuthed ? (
-        <Welcome
-          username={username}
-          onLogout={() => {
-            setIsAuthed(false);
-            setUsername('');
-          }}
-        />
+        <Welcome username={username} onLogout={handleLogout} />
       ) : (
         <LoginForm onLogin={handleLogin} errorMessage={errorMessage} />
       )}
