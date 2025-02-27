@@ -6,7 +6,7 @@ describe('Button', () => {
     cy.get('button').contains('Click Me');
   });
 
-  it('when button is clicked, should call onClick', () => {
+  it('should call onClick when button is clicked', () => {
     const onClickSpy = cy.spy().as('onClickSpy');
     cy.mount(<Button onClick={onClickSpy}>Click Me</Button>);
     cy.get('button').contains('Click Me').click();

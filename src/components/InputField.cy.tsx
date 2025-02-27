@@ -13,7 +13,7 @@ describe('InputField', () => {
     cy.get('label').contains('Name');
   });
 
-  it('when there is no value and form is submitted, should show a required message', () => {
+  it('should show a required message when there is no value and form is submitted', () => {
     cy.mount(
       <InputField
         name="name"
