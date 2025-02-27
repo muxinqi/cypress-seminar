@@ -7,8 +7,9 @@ describe('Button', () => {
   });
 
   it('when button is clicked, should call onClick', () => {
-    cy.mount(<Button onClick={cy.spy().as('onClick')}>Click Me</Button>);
+    const onClickSpy = cy.spy().as('onClickSpy');
+    cy.mount(<Button onClick={onClickSpy}>Click Me</Button>);
     cy.get('button').contains('Click Me').click();
-    cy.get('@onClick').should('have.been.called');
+    cy.get('@onClickSpy').should('have.been.called');
   });
 });
