@@ -1,7 +1,7 @@
 import App from './App';
 
 describe('LoginForm', () => {
-  it('should redirect to welcome screen when creds are correct', () => {
+  it('should redirect to welcome screen when credentials are correct', () => {
     cy.mount(<App />);
     cy.contains('Username').find('input').type('testuser');
     cy.contains('Password').find('input').type('testpassword');
@@ -15,7 +15,7 @@ describe('LoginForm', () => {
     cy.contains('Welcome testuser!')
   });
 
-  it('should show error message when creds are incorrect', () => {
+  it('should show error message when credentials are incorrect', () => {
     cy.mount(<App />);
     cy.contains('Username').find('input').type('baduser');
     cy.contains('Password').find('input').type('badpassword');
