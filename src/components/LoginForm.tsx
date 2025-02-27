@@ -12,7 +12,7 @@ interface LoginFormProps {
   }) => void;
   title?: string;
   errorMessage?: string;
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLogin, title = 'Log In', errorMessage, isLoading }) => {
