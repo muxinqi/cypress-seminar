@@ -5,7 +5,7 @@ describe('LoginForm', () => {
     cy.mount(<App />);
     cy.contains('Username').find('input').type('testuser');
     cy.contains('Password').find('input').type('testpassword');
-    cy.intercept('POST', '/auth', {
+    cy.intercept('POST', 'http://localhost:3000/auth', {
       statusCode: 200,
       body: {
         message: 'Authenticated',
@@ -19,7 +19,7 @@ describe('LoginForm', () => {
     cy.mount(<App />);
     cy.contains('Username').find('input').type('baduser');
     cy.contains('Password').find('input').type('badpassword');
-    cy.intercept('POST', '/auth', {
+    cy.intercept('POST', 'http://localhost:3000/auth', {
       statusCode: 401,
       body: {
         message: 'Bad username or password',

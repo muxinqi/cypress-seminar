@@ -18,6 +18,8 @@
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "body-parser": "^2.1.0",
+    "cors": "^2.8.5",
     "cypress": "^14.1.0",
     "express": "^5.0.1",
     "postcss": "^8.4.47",

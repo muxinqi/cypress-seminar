@@ -6,28 +6,30 @@ function App() {
   const [isAuthed, setIsAuthed] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [username, setUsername] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (credentials: { username: string; password: string }) => {
     try {
       setErrorMessage('');
-      const res = await fetch('/auth', {
+      setIsLoading(true);
+      const res = await fetch('http://localhost:3000/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),
       });
-      if (res.status === 200) {
+      if (res.ok) {
         setIsAuthed(true);
         setUsername(credentials.username);
+      } else if (res.status === 401) {
+        const { message } = await res.json();
+        setErrorMessage(message);
       } else {
-        if (res.status === 401) {
-          const { message } = await res.json();
-          setErrorMessage(message);
-        } else {
-          throw Error(`error during auth, status code: ${res.status}`);
-        }
+        throw Error(`error during auth, status code: ${res.status}`);
       }
     } catch (e) {
       console.error(e);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -41,7 +43,7 @@ function App() {
       {isAuthed ? (
         <Welcome username={username} onLogout={handleLogout} />
       ) : (
-        <LoginForm onLogin={handleLogin} errorMessage={errorMessage} />
+        <LoginForm onLogin={handleLogin} errorMessage={errorMessage} isLoading={isLoading} />
       )}
     </div>
   );

@@ -12,9 +12,10 @@ interface LoginFormProps {
   }) => void;
   title?: string;
   errorMessage?: string;
+  isLoading: boolean;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin, title = 'Log In', errorMessage }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onLogin, title = 'Log In', errorMessage, isLoading }) => {
   const [submitted, setSubmitted] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -53,9 +54,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, title = 'Log In', errorM
             autoComplete="current-password"
           />
           <Button type="submit">Login</Button>
-          {errorMessage && (
-            <div className="text-red-500 mt-2">{errorMessage}</div>
-          )}
+          {isLoading && <div className="text-gray-500 mt-2">Loading...</div>}
+          {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
         </fieldset>
       </form>
     </div>
